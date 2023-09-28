@@ -7,7 +7,7 @@ public class GameOfLife : MonoBehaviour
 {
     public GameObject cellPrefab;
 
-  
+
 
     private float clock;
     public float frequency;
@@ -27,7 +27,7 @@ public class GameOfLife : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(1920, 1080, true);
-       
+
         cells = new GameObject[amountX,amountY];
 
         size = 1920 / amountX;
@@ -39,7 +39,7 @@ public class GameOfLife : MonoBehaviour
 
                 cells[x, y] = Instantiate(Resources.Load("Cell")) as GameObject;
                 cells[x,y].name = "Cell"+x.ToString() + y.ToString();
-                
+
                 // Create a position based on x, y
                 Vector3 pos = transform.position;
                 float cellWidth = 1f;
@@ -60,7 +60,7 @@ public class GameOfLife : MonoBehaviour
     void Update()
     {
 
-       
+
        if (runOr)
         {
             if (clock < frequency)
@@ -74,12 +74,12 @@ public class GameOfLife : MonoBehaviour
             }
         }
     }
-    
+
     public void StartGame()
     {
-        
+
             runOr = true;
-        
+
     }
 
     public void Pause()
@@ -172,7 +172,7 @@ public class GameOfLife : MonoBehaviour
             {
                 if (cells[x + 1, y - 1].GetComponent<CellScript>().state > 0)
                 {
-                    count++; 
+                    count++;
                 }
             }
             if (cells[x + 1, y ].GetComponent<CellScript>().state > 0)
@@ -186,7 +186,7 @@ public class GameOfLife : MonoBehaviour
                     count++;
                 }
             }
-                
+
          }
         if (y > 0)
         {
@@ -194,7 +194,7 @@ public class GameOfLife : MonoBehaviour
             {
                 count++;
             }
-           
+
         }
         if (y < amountY - 1)
         {
@@ -203,7 +203,7 @@ public class GameOfLife : MonoBehaviour
             }
         }
 
-        
+
         return count;
          //Debug.Log(count);
     }
@@ -214,7 +214,7 @@ public class GameOfLife : MonoBehaviour
 
 
 
- 
+
 
 
 

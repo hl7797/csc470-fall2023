@@ -14,7 +14,7 @@ public class CellScript : MonoBehaviour
     public int state; //1-life  0-die
     public int count;
 
-   
+
 
     private bool isClicked = false;
 
@@ -67,14 +67,13 @@ public class CellScript : MonoBehaviour
    private void OnMouseDown()
    {
         isClicked = !isClicked;
-   
-            
+
           ChangeState();
            UpdateColor();
-          
+
         }
 
 
 
-   
+
 }
