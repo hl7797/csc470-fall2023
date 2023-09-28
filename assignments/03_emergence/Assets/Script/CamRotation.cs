@@ -24,7 +24,7 @@ public class CamRotation : MonoBehaviour
             mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
             xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, 0, 50);
+            xRotation = Mathf.Clamp(xRotation, 0, 10);
 
             camctr.Rotate(Vector3.up * mouseX);
             transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
