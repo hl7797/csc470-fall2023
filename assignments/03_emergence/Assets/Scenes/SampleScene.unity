@@ -655,7 +655,7 @@ MonoBehaviour:
   camctr: {fileID: 46057768}
   mouseX: 0
   mouseY: 0
-  mouseSensitivity: 100
+  mouseSensitivity: 50
   xRotation: 0.5
 --- !u!1 &1797530440
 GameObject:
