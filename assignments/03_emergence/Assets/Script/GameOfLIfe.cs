@@ -60,7 +60,24 @@ public class GameOfLife : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.Return)){
+           runOr = true;
+        }
 
+        if (Input.GetKeyDown(KeyCode.Space)){
+        runOr = false;
+        }
+
+ if (Input.GetKeyDown(KeyCode.C)){
+        runOr = false;
+        for(int i = 0;i< amountX; i++)
+        {
+            for(int j = 0;j < amountY; j++)
+            {
+                cells[i, j].GetComponent<CellScript>().state = 0;
+            }
+        }
+         }
        if (runOr)
         {
             if (clock < frequency)
@@ -77,18 +94,22 @@ public class GameOfLife : MonoBehaviour
 
     public void StartGame()
     {
-
-            runOr = true;
+        if (Input.GetKeyDown(KeyCode.KeypadEnter)){
+           runOr = true;
+        }
 
     }
 
     public void Pause()
     {
+        if (Input.GetKeyDown(KeyCode.Space)){
         runOr = false;
+        }
     }
 
     public void Reset()
     {
+         if (Input.GetKeyDown(KeyCode.C)){
         runOr = false;
         for(int i = 0;i< amountX; i++)
         {
@@ -97,6 +118,7 @@ public class GameOfLife : MonoBehaviour
                 cells[i, j].GetComponent<CellScript>().state = 0;
             }
         }
+         }
     }
 
 
