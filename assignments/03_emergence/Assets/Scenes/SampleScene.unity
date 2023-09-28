@@ -440,11 +440,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press "Return" to start
+  m_Text: 'Click cubes
+
+    Press "Entern" to start
 
     Press "Space" to stop
 
-    Press "C" to clear'
+    Press
+    "C" to clear'
 --- !u!222 &313584299
 CanvasRenderer:
   m_ObjectHideFlags: 0
