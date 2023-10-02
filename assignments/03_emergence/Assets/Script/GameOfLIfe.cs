@@ -19,7 +19,7 @@ public class GameOfLife : MonoBehaviour
     [HideInInspector]
     //public CellScript[,] cells;
     public GameObject[,] cells;
-    private float size;
+
 
 
 
@@ -30,7 +30,7 @@ public class GameOfLife : MonoBehaviour
 
         cells = new GameObject[amountX,amountY];
 
-        size = 1920 / amountX;
+
 
         for (int x = 0; x < amountX; x++)
         {
@@ -92,34 +92,7 @@ public class GameOfLife : MonoBehaviour
         }
     }
 
-    public void StartGame()
-    {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter)){
-           runOr = true;
-        }
-
-    }
-
-    public void Pause()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)){
-        runOr = false;
-        }
-    }
-
-    public void Reset()
-    {
-         if (Input.GetKeyDown(KeyCode.C)){
-        runOr = false;
-        for(int i = 0;i< amountX; i++)
-        {
-            for(int j = 0;j < amountY; j++)
-            {
-                cells[i, j].GetComponent<CellScript>().state = 0;
-            }
-        }
-         }
-    }
+   
 
 
 
