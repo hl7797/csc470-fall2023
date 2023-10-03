@@ -172,7 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e644cb7674dab4e2b9fb3652cdc83d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  y: 1.5
   state: 0
   count: 0
-  aliveColor: {r: 0.48126557, g: 0.9716981, b: 0.51738083, a: 0}
+  high: {x: 0, y: 0, z: 0}
+  aliveColor: {r: 0.3931559, g: 0.8962264, b: 0.41639286, a: 0}
   originalColor: {r: 0, g: 0, b: 0, a: 0}

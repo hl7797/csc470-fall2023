@@ -11,6 +11,8 @@ public class CellScript : MonoBehaviour
 {
   //public GameObject cellPrefab;
 
+    public float y = 1.5f;
+   
     public int state; //1-life  0-die
     public int count;
 
@@ -20,6 +22,7 @@ public class CellScript : MonoBehaviour
 
     GameOfLife gol;
     Renderer rend;
+    public Vector3 high;
 
     public Color aliveColor;
     public Color originalColor;
@@ -38,6 +41,8 @@ public class CellScript : MonoBehaviour
     void Update()
     {
         UpdateColor();
+        //Changehigh();
+       
     }
 
     public void ChangeState()
@@ -55,14 +60,18 @@ public class CellScript : MonoBehaviour
     {
         if (state==1)
         {
-            rend.material.color = aliveColor;
+            rend.material.color = new Color(Random.value,Random.value,Random.value);
         }
         else
         {
             rend.material.color = originalColor;
         }
     }
-
+//public void  Changehigh(){
+   // if (state ==1){
+    //    transform.localScale = new Vector3(1,y,1);
+   // }
+//}
 
    private void OnMouseDown()
    {
