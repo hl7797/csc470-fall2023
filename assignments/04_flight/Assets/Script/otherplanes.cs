@@ -13,16 +13,16 @@ using static UnityEngine.GridBrushBase;
 public class otherplanes : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float moveSpeed = 0; // 飞机的移动速度
+    public float moveSpeed = 0;
 
     public ParticleSystem PlaneColl;
     private float lastScoreTime;
     public float scoreInterval = 1.0f;
     public float rotationSpeed = 30.0f;
-    public float zrotationSpeed = 30.0f;// 飞机的旋转速度
+    public float zrotationSpeed = 30.0f;
     public float xrotationSpeed = 5f;
 
-    public float changeDirectionInterval = 2.0f; // 改变方向的间隔时间
+    public float changeDirectionInterval = 2.0f; 
   
     private float timeChange = 0f;
     private Rigidbody rb;
@@ -32,7 +32,6 @@ public class otherplanes : MonoBehaviour
 
     void Start()
     {
-        // 初始化飞机的初始随机方向
 
        
         rb = this.GetComponent<Rigidbody>();
@@ -104,10 +103,9 @@ public class otherplanes : MonoBehaviour
                 {
                     if (Time.time - lastScoreTime >= scoreInterval)
                     {
-                        // 进行积分操作
-                       // 假设这是积分管理器，你可以根据你的游戏逻辑来修改
+                       
                         lastScoreTime = Time.time;
-                        gc.attack(1);// 更新上次积分时间
+                        gc.attack(1);
                     }
                   
                 }

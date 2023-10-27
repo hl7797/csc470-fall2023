@@ -29,7 +29,7 @@ public class bullet2 : MonoBehaviour
 
 
             Destroy(gameObject);
-            gc.incScore(-200);
+            gc.incScore(-500);
         }
     }
 }

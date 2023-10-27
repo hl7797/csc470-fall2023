@@ -6,7 +6,7 @@ using static UnityEditor.PlayerSettings;
 
 public class rockets : MonoBehaviour
 {
-   // public GameObject rocketprefab ;
+   
 
     public float rotationSpeed = 50f;
 

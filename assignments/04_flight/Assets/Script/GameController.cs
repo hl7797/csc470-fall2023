@@ -50,11 +50,12 @@ public class GameController : MonoBehaviour
 
     public bool runOr;
 
-    public float gentime = 0.001f;
+    public float gentime;
     public float gentimeB;
     public float gentimeC;
 
     private float timeSinceLastSpawn = 0f;
+    private float genTime = 0f;
     void Start()
     {
 
@@ -241,13 +242,13 @@ public class GameController : MonoBehaviour
         float y = Random.Range(10, 50); ;
         float z = Random.Range(10, 950);
         Vector3 pos = new Vector3(x, y, z);
-        timeSinceLastSpawn += Time.deltaTime;
+        genTime += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= gentimeC)
+        if (genTime >= gentimeC)
         {
             GameObject OthPlaneOj = Instantiate(OthPlanes, pos, transform.rotation);
-           // Destroy(bullObj, 10f);
-            timeSinceLastSpawn = 0f;
+           
+            genTime = 0f;
 
 
 
