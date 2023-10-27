@@ -18,8 +18,7 @@ public class GameController : MonoBehaviour
 {
 
 
-   // private Vector3 initialPosition;
-   // private Quaternion initialRotation;
+  
    private Transform model;
     public Slider gas;
     public Transform fire;
@@ -28,7 +27,7 @@ public class GameController : MonoBehaviour
     public GameObject bullet;
     public GameObject OthPlanes;
     public GameObject rocket;
-    public GameObject PlaneC;
+   
     public int score;
     public int num = 0;
 
