@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public GameObject OthPlanes;
     public GameObject rocket;
    
+   
     public int score;
     public int num = 0;
 
@@ -52,16 +53,18 @@ public class GameController : MonoBehaviour
     public float gentime;
     public float gentimeB;
     public float gentimeC;
+  
 
     private float timeSinceLastSpawn = 0f;
     private float genTime = 0f;
+   
     void Start()
     {
 
         scoreText.text = "Bullet: " +score;
         instructions.text = "Press 'Tab' show instruction";
         numText.text = "Score: " + 0;
-        //instructions.enabled = true;
+        
         if (runOr == true)
 
         {
@@ -104,7 +107,7 @@ public class GameController : MonoBehaviour
             {
                 runOr = true;
                 
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("platform");
                 GameObject Plane = Instantiate(PlaneObj, transform.position, Quaternion.identity);
                 Plane.transform.parent = transform;
 
@@ -139,6 +142,7 @@ public class GameController : MonoBehaviour
         xTurn();
         roc();
         GenOthPlane();
+       
         bull();
        
     }
@@ -200,7 +204,7 @@ public class GameController : MonoBehaviour
     void roc()
     {
         float x = Random.Range(10, 950);
-        float y = Random.Range(10, 50); ;
+        float y = Random.Range(15, 50); ;
         float z = Random.Range(10, 950);
         Vector3 pos = new Vector3(x, y, z);
         timeSinceLastSpawn += Time.deltaTime;
@@ -219,7 +223,7 @@ public class GameController : MonoBehaviour
     void bull()
     {
         float x = Random.Range(10, 950);
-        float y = Random.Range(10, 50); ;
+        float y = Random.Range(15, 50); ;
         float z = Random.Range(10, 950);
         Vector3 pos = new Vector3(x, y, z);
         timeSinceLastSpawn += Time.deltaTime;
@@ -238,7 +242,7 @@ public class GameController : MonoBehaviour
     void GenOthPlane()
     {
         float x = Random.Range(10, 950);
-        float y = Random.Range(10, 50); ;
+        float y = Random.Range(15, 50); ;
         float z = Random.Range(10, 950);
         Vector3 pos = new Vector3(x, y, z);
         genTime += Time.deltaTime;
@@ -254,6 +258,8 @@ public class GameController : MonoBehaviour
         }
     }
 
+
+   
     void genBullet()
 
     {

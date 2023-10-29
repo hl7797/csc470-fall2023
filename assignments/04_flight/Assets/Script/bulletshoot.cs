@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class intialpos : MonoBehaviour
+public class bulletshoot : MonoBehaviour
 {
     public ParticleSystem bulletColl;
     GameController gc;

@@ -38,7 +38,7 @@ public class Collision : MonoBehaviour
             if (plane.CompareTag("map") || plane.CompareTag("Othplane"))
             {
                 gc.runOr = false;
-                gameoverText.text = "      GameOver ! \n Press 'R' to restart.";
+                gameoverText.text = "      GameOver ! \n Press 'Return' to restart.";
                
              
                 Transform child = gc.transform.Find("Plane(Clone)");

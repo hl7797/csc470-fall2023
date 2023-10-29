@@ -10,6 +10,10 @@ TagManager:
   - bullet
   - bullet2
   - Othplane
+  - Enemy
+  - weapon
+  - heart
+  - people
   layers:
   - Default
   - TransparentFX
