@@ -1,5 +1,6 @@
 //using System.Collections;
 //using System.Collections.Generic;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,23 +23,33 @@ public class PeopleMoveCtr : MonoBehaviour
     float jumpForce = 18;
     float gravityModifier = 4.5f;
     float yVelocity = 0;
+    PlatController pc;
     private void Start()
     {
+        GameObject gmObj = GameObject.Find("GameSetting");
+        pc = gmObj.GetComponent<PlatController>();
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        Power.value += 0.0001f;
-        if(Power.value > 0)
+        if (pc.run == true)
         {
-            addSpeed();
+
+
+            {
+
+            }
+            Power.value += 0.0001f;
+            if (Power.value > 0)
+            {
+                addSpeed();
+            }
+
+            attack();
+            Move();
         }
-       
-        attack();
-        Move();
-        
        
         }
     private void Move()
