@@ -206,7 +206,6 @@ MonoBehaviour:
   bullet: {fileID: 8419883049368832064, guid: a5a3805f02fca244286ed576fc932277, type: 3}
   OthPlanes: {fileID: 1155056973566041726, guid: adf4a6cfb569b144a9bf7585ff115cde, type: 3}
   rocket: {fileID: 3507374519571868854, guid: dd9a4fce1ae20f549b4b605e5157be6a, type: 3}
-  Heart: {fileID: 4305861179302011643, guid: 803d9e76b7af7a24f9fbbbb24a368181, type: 3}
   score: 2000
   num: 0
   numText: {fileID: 677616428}
@@ -216,7 +215,6 @@ MonoBehaviour:
   gentime: 0.15
   gentimeB: 0.15
   gentimeC: 0.5
-  gentimeD: 0.15
 --- !u!65 &6685841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1670,8 +1668,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
