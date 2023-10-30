@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Changing : MonoBehaviour
 {
+    public bool coll;
     public TMP_Text kill;
     public TMP_Text inst;
     public int killed;
@@ -20,7 +21,10 @@ public class Changing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (Input.GetKey(KeyCode.E) && coll == true)
+        {
+            SceneManager.LoadScene("samplescene");
+        }
         kill.text = "Gold: " + killed; ;
         if (Input.GetKey(KeyCode.Tab))
         {
@@ -38,10 +42,8 @@ public class Changing : MonoBehaviour
     {
         if (plane.CompareTag("people") && killed >= 5 )
         {
-            if (Input.GetKey(KeyCode.E))
-            {
-                SceneManager.LoadScene("samplescene");
-            }
+            coll = true;
         }
+     
     }
 }

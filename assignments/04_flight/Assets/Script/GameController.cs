@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
   
 
     private float timeSinceLastSpawn = 0f;
+    private float timebull = 0f;
     private float genTime = 0f;
    
     void Start()
@@ -226,13 +227,13 @@ public class GameController : MonoBehaviour
         float y = Random.Range(15, 50); ;
         float z = Random.Range(10, 950);
         Vector3 pos = new Vector3(x, y, z);
-        timeSinceLastSpawn += Time.deltaTime;
+        timebull += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= gentimeB)
+        if (timebull >= gentimeB)
         {
             GameObject bullObj = Instantiate(BullObj, pos, transform.rotation);
             Destroy(bullObj, 10f);
-            timeSinceLastSpawn = 0f;
+            timebull = 0f;
 
 
 
