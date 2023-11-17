@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Image healthF;
     public Image HealthB;
     public float damage;
+    public bool FunState = true;
+    public int people = 0;
 
     // Start is called before the first frame update
     void Awake()
