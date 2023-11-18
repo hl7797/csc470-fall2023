@@ -74,7 +74,8 @@ public class Attack : MonoBehaviour
 
         if ( EnemyHealth.rectTransform.sizeDelta.x <= 0)
         {
-           
+            GameManager.Instance.Gameover = true;
+            GameManager.Instance.GameOver.text = " GameOver \n Press 'R' restart";
             //Debug.Log("die");
             EnemyAttack.SetBool("Die", true);
             Enemyhealth.enabled = false;

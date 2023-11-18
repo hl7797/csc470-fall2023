@@ -33,7 +33,7 @@ public class ObjectPool : MonoBehaviour
             list.RemoveAt(0);
             return obj;
         }
-        return Instantiate(points, pos2+targetRotation *new Vector3(0, 0, -2), Quaternion.identity);
+        return Instantiate(points, pos2+targetRotation *new Vector3(0, 0, -2), GameObject.rotation);
        
        
        
