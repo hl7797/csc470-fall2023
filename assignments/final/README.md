@@ -40,6 +40,21 @@ Input:
     'ctrl' roll
     'left click' shoot
     'tab' check rules
+
+Visual style:
+
+	The style of the game is sci-fi and realistic. The scenes are mostly realistic buildings. 
+ 	The player controls a character who is a soldier wearing futuristic armor. The enemy is zombies
+
+Audio style:
+
+	The style of the music has special sound effects depending on the scene and action, such as the sound of the character moving, 
+ 	the sound of rolling, and the sound of attacking. 
+ 	There is a sound of bullets being fired when the character attacks, and there is a sound of hitting the target after hitting it. 
+  	Makes a sound when zombies approach the character.
+   	The voice is agitated and a little scary.
+
+	
    
 
  
