@@ -1,44 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+//using static UnityEngine.GraphicsBuffer;
 using UnityEngine.AI;
 
 public class EnemyCtr : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Transform target; // 目标（通常是玩家）
+    public Transform target; 
 
     private NavMeshAgent navMeshAgent;
     public float chaseRange = 10f;
-
+    private Animator animator;
+    public float attackRange = 2f;
+    private float timeSinceLastAttack = 0f;
+    public float attackDelay = 1f; // 攻击间隔
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-
-        // 设置初始目标
         SetRandomTarget();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (target != null)
         {
-            // 计算与玩家的距离
             float distanceToPlayer = Vector3.Distance(transform.position, target.position);
-
-            // 如果在追击范围内
             if (distanceToPlayer <= chaseRange)
             {
-                // 设置目标为玩家位置
                 navMeshAgent.SetDestination(target.position);
+                navMeshAgent.speed = 5f;
+                animator.SetBool("Run", true);
+                if (distanceToPlayer <= attackRange)
+                {
+                    
+                    Attack();
+                }
             }
             else
             {
-                // 如果到达目标点，设置新的目标
+                animator.SetBool("Attack", false);
                 if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f)
                 {
+                    navMeshAgent.speed = 1f;
                     SetRandomTarget();
+                    animator.SetBool("Run", false);
                 }
             }
         }
@@ -51,5 +58,17 @@ public class EnemyCtr : MonoBehaviour
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas);      
         navMeshAgent.SetDestination(hit.position);
+    }
+    void Attack()
+    {
+        // 检查攻击间隔
+        if (Time.time - timeSinceLastAttack >= attackDelay)
+        {
+            animator.SetBool("Attack", true);
+            animator.SetBool("Run", false);
+
+            GameManager.Instance.health -= 10;
+            timeSinceLastAttack = Time.time;
+        }
     }
 }

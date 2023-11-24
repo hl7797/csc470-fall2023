@@ -1,10 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class PlayerCtr : MonoBehaviour
 {
     private bool move = true;
+    private bool attack = true;
+    
     private Rigidbody rb;
     public float MoveSpeed = 6;
     public float rotateSpeed = 60;
@@ -15,29 +19,53 @@ public class PlayerCtr : MonoBehaviour
     public Transform fire_pos;
 
     public float jumpForce = 5f; 
-    public float groundCheckDistance ;
-   
+    public float groundCheckDistance=0.1f ;
+
+    public TMP_Text BulletNum;
+    public int Bulletnum = 500;
     // Start is called before the first frame update
     void Start()
     {
         rb =GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        BulletNum.text = Bulletnum.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(move)
+       
+        if (move)
         {
             movement();
         }
-       
-        Rotate();
-        Attack();
-        Jump();
-        Reload();
-       // Debug.DrawRay(fire_pos.position, transform.forward * 50f, Color.red);
+       if (attack)
+        {
+            Attack();
+          
+        }
+      
+            Reload();
         
+        Rotate();
+       
+        Jump();
+
+       
+            if (Input.GetMouseButtonUp(0))
+        {
+            move = true;
+            animator.SetBool("Attack", false);
+            fire.SetActive(false);
+        }
+        if (Bulletnum <= -1)
+        {
+            attack = false;
+            animator.SetBool("Attack", false);
+            fire.SetActive(false);
+        }
+        // Debug.DrawRay(fire_pos.position, transform.forward * 50f, Color.red);
+
     }
 
     private void movement()
@@ -77,32 +105,27 @@ public class PlayerCtr : MonoBehaviour
   void Attack()
     {
       
-        if (Input.GetMouseButtonDown(0))
+        BulletNum.text = Bulletnum.ToString();
+        if (Input.GetMouseButton(0))
         {
+
+            Bulletnum -= 1;
             move = false;
+           
             animator.SetBool("Attack", true);
             fire.SetActive(true);
             bool res = Physics.Raycast(fire_pos.position, fire_pos.forward, 80, 1 << LayerMask.NameToLayer("enemy"));
             if (res)
             {
                 print("hit");
-            }
-            
-        }
-      
-        if (Input.GetMouseButtonUp(0)) 
-        {
-            move = true;
-            animator.SetBool("Attack", false);
-            fire.SetActive(false);
+               
+            }          
         }
     }
 
     
         void Jump()
-    {
-     
-      
+    {     
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             animator.SetBool("Jump", true);
@@ -125,6 +148,17 @@ public class PlayerCtr : MonoBehaviour
 
     void Reload()
     {
-
-    }
+       
+        if (Bulletnum<500&&Input.GetKeyDown(KeyCode.R))
+        {
+            animator.SetBool("Reload", true);
+            Bulletnum = 500;
+            attack = true;           
+        }       
+       else
+        {
+          
+            animator.SetBool("Reload", false);
+        }       
+    }    
 }
