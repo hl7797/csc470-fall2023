@@ -2,6 +2,8 @@
 //using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 
 public class PlayerCtr : MonoBehaviour
@@ -17,12 +19,13 @@ public class PlayerCtr : MonoBehaviour
     public float maxMouseRotation = 45f;
     public GameObject fire;
     public Transform fire_pos;
-
+    private Vector3 moving;
     public float jumpForce = 5f; 
     public float groundCheckDistance=0.1f ;
 
     public TMP_Text BulletNum;
     public int Bulletnum = 500;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +49,7 @@ public class PlayerCtr : MonoBehaviour
         }
       
             Reload();
-        
+        dead();
         Rotate();
        
         Jump();
@@ -75,8 +78,8 @@ public class PlayerCtr : MonoBehaviour
 
         if (hAxis != 0|| vAxis !=0) 
         {           
-            Vector3 movement = new Vector3(hAxis, 0f, vAxis) * MoveSpeed * Time.deltaTime;
-            transform.Translate(movement);
+             moving = new Vector3(hAxis, 0f, vAxis) * MoveSpeed * Time.deltaTime;
+            transform.Translate(moving);
             animator.SetBool("Move", true);
         }
         else
@@ -117,6 +120,7 @@ public class PlayerCtr : MonoBehaviour
             bool res = Physics.Raycast(fire_pos.position, fire_pos.forward, 80, 1 << LayerMask.NameToLayer("enemy"));
             if (res)
             {
+                GameManager.Instance.Ehealth -= 0.1f;
                 print("hit");
                
             }          
@@ -148,17 +152,38 @@ public class PlayerCtr : MonoBehaviour
 
     void Reload()
     {
-       
-        if (Bulletnum<500&&Input.GetKeyDown(KeyCode.R))
+
+        if (Bulletnum < 500 && Input.GetKeyDown(KeyCode.R))
         {
             animator.SetBool("Reload", true);
+            animator.SetTrigger("move");
             Bulletnum = 500;
-            attack = true;           
-        }       
-       else
+            attack = true;
+
+            animator.SetTrigger("move");
+            
+                
+
+        }
+        else
         {
-          
+
             animator.SetBool("Reload", false);
         }       
-    }    
+    } 
+    
+    void dead()
+    {
+        if (GameManager.Instance.health <= 0)
+        {
+            
+            GameManager.Instance.health = 0;
+            animator.SetBool("Dead", true);
+            Invoke("end", 1f);
+        }
+    }
+    private void end()
+    {
+        SceneManager.LoadScene("End");
+    }
 }

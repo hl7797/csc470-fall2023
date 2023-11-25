@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     public static GameManager Instance;
     public int health= 100;
+    public float Ehealth = 10;
     public TMP_Text healthVal;
     void Awake()
     {
@@ -29,14 +30,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         healthVal.text = health.ToString();
+        
     }
 
-    void playerDead()
-    {
-        //dead
-        if (health <= 0)
-        {
-
-        }
-    }
+  
 }
