@@ -87,6 +87,7 @@ public class EnemyCtr : MonoBehaviour
     }
     void Enemydisappear()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

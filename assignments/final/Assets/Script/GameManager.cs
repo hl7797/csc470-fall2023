@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int health= 100;
     public float Ehealth = 10;
     public TMP_Text healthVal;
+    public GameObject Enemy;
     void Awake()
     {
         if (Instance != null)
@@ -29,9 +30,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //enemyI();
         healthVal.text = health.ToString();
         
     }
 
-  
+    private void enemyI()
+    {
+
+        float x = Random.Range(-25, 55);
+        float z= Random.Range(-25, 55);
+        Vector3 pos = new Vector3(x,0,z);
+        Instantiate(Enemy, pos, Quaternion.identity);
+        
+    }
+
 }
+
+
+
