@@ -1,16 +1,25 @@
-//using System.Collections;
+using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static GameManager Instance;
     public int health= 100;
-    public float Ehealth = 10;
+   
     public TMP_Text healthVal;
-    public GameObject Enemy;
+    
+    public Transform target;
+   
+    public bool res;
+
+   
+    public GameObject enemyPrefab;
+    public int numberOfEnemies = 15;
+    public TMP_Text NumOfEnemy;
     void Awake()
     {
         if (Instance != null)
@@ -22,30 +31,42 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+       
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         healthVal.text= health.ToString();
+       
+        SpawnEnemies();
+     
+
     }
 
+  
     // Update is called once per frame
     void Update()
     {
-        //enemyI();
+       
         healthVal.text = health.ToString();
-        
+       
+
     }
 
-    private void enemyI()
+    void SpawnEnemies()
     {
-
-        float x = Random.Range(-25, 55);
-        float z= Random.Range(-25, 55);
-        Vector3 pos = new Vector3(x,0,z);
-        Instantiate(Enemy, pos, Quaternion.identity);
-        
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            GameObject enemyObject = Instantiate(enemyPrefab, RandomPosition(), Quaternion.identity);          
+            Enemy enemyScript = enemyObject.AddComponent<Enemy>();
+           
+        }
     }
 
-}
+    Vector3 RandomPosition()
+    {
+        return new Vector3(Random.Range(-25f, 55f), 0f, Random.Range(-25f, 55f));
+    }
+  
+    }
 
 
 

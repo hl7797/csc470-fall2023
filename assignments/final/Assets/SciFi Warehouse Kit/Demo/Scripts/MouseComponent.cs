@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +9,7 @@ public class MouseComponent : MonoBehaviour
     public Transform playerBody;
     float xRotation = 0f;
 
+   
     void Start()
     {
         Cursor.visible = false;
@@ -30,4 +31,6 @@ public class MouseComponent : MonoBehaviour
             SceneManager.LoadScene("SampleScene");
         }
     }
+
+   
 }

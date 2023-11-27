@@ -26,18 +26,26 @@ public class PlayerCtr : MonoBehaviour
     public TMP_Text BulletNum;
     public int Bulletnum = 500;
 
+    private RaycastHit raycastHit;
+    private RaycastHit enemyHit;
+    public float damage = 0.1f;
+
+   
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb =GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        BulletNum.text = Bulletnum.ToString();
+        BulletNum.text = Bulletnum.ToString();      
     }
 
+
+   
     // Update is called once per frame
     void Update()
-    {
-       
+    {     
         if (move)
         {
             movement();
@@ -48,10 +56,9 @@ public class PlayerCtr : MonoBehaviour
           
         }
       
-            Reload();
+        Reload();
         dead();
         Rotate();
-       
         Jump();
 
        
@@ -117,13 +124,17 @@ public class PlayerCtr : MonoBehaviour
            
             animator.SetBool("Attack", true);
             fire.SetActive(true);
-            bool res = Physics.Raycast(fire_pos.position, fire_pos.forward, 80, 1 << LayerMask.NameToLayer("enemy"));
-            if (res)
+   
+          Ray ray = new Ray(fire_pos.position, fire_pos.forward);
+            GameManager.Instance.res = Physics.Raycast(ray, out enemyHit, 80, 1 << LayerMask.NameToLayer("enemy"));
+            if (GameManager.Instance.res)
             {
-                GameManager.Instance.Ehealth -= 0.1f;
-                print("hit");
-               
-            }          
+                print("hit" + enemyHit.collider.name);
+                Enemy enemy = enemyHit.collider.GetComponent<Enemy>();
+                //EnemyCtr enemies = enemyHit.collider.GetComponent<EnemyCtr>();
+                enemy.TakeDamage(damage);
+                //enemies.die = true;
+            }
         }
     }
 
@@ -144,8 +155,7 @@ public class PlayerCtr : MonoBehaviour
         }
     }
     bool IsGrounded()
-    {
-       
+    {       
         RaycastHit hit;
         return Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance);
     }
@@ -159,15 +169,10 @@ public class PlayerCtr : MonoBehaviour
             animator.SetTrigger("move");
             Bulletnum = 500;
             attack = true;
-
             animator.SetTrigger("move");
-            
-                
-
         }
         else
         {
-
             animator.SetBool("Reload", false);
         }       
     } 
@@ -175,8 +180,7 @@ public class PlayerCtr : MonoBehaviour
     void dead()
     {
         if (GameManager.Instance.health <= 0)
-        {
-            
+        {           
             GameManager.Instance.health = 0;
             animator.SetBool("Dead", true);
             Invoke("end", 1f);

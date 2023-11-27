@@ -6,38 +6,41 @@ using UnityEngine.AI;
 
 public class EnemyCtr : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Transform target; 
-
+    
+  public float Ehealth=10f;
+   
     private NavMeshAgent navMeshAgent;
     public float chaseRange = 10f;
     private Animator animator;
     public float attackRange = 2f;
     private float timeSinceLastAttack = 0f;
-    public float attackDelay = 1f; // ¹¥»÷¼ä¸ô
+    public float attackDelay = 1f;
+    public bool die = false;
     
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         SetRandomTarget();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();                
     }
+   
 
     void Update()
-    {
-        die();
-      
-            if (target != null)
+    {      
+        if (die == true)
+        {
+            navMeshAgent.isStopped = true;
+        }
+            if (GameManager.Instance.target != null)
             {
-                float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+                float distanceToPlayer = Vector3.Distance(transform.position, GameManager.Instance.target.position);
                 if (distanceToPlayer <= chaseRange)
                 {
-                    navMeshAgent.SetDestination(target.position);
+                    navMeshAgent.SetDestination(GameManager.Instance.target.position);
                     navMeshAgent.speed = 5f;
                     animator.SetBool("Run", true);
                     if (distanceToPlayer <= attackRange)
                     {
-
                         Attack();
                     }
                 }
@@ -51,8 +54,7 @@ public class EnemyCtr : MonoBehaviour
                         animator.SetBool("Run", false);
                     }
                 }
-            }
-        
+            }        
     }
 
     void SetRandomTarget()
@@ -64,8 +66,7 @@ public class EnemyCtr : MonoBehaviour
         navMeshAgent.SetDestination(hit.position);
     }
     void Attack()
-    {
-        // ¼ì²é¹¥»÷¼ä¸ô
+    {        
         if (Time.time - timeSinceLastAttack >= attackDelay)
         {
             animator.SetBool("Attack", true);
@@ -74,20 +75,5 @@ public class EnemyCtr : MonoBehaviour
             GameManager.Instance.health -= 10;
             timeSinceLastAttack = Time.time;
         }
-    }
-
-    void die()
-    {
-        if (GameManager.Instance.Ehealth<=1)
-        {
-           
-            animator.SetBool("die", true);
-            Invoke("Enemydisappear", 2f);
-        }
-    }
-    void Enemydisappear()
-    {
-        //gameObject.SetActive(false);
-        Destroy(gameObject);
-    }
+    }   
 }
