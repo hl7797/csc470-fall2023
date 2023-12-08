@@ -1,10 +1,12 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MouseComponent : MonoBehaviour
 {
+    public SFader sceneFader;
     public float mouseSensitivity = 100f;
     public Transform playerBody;
     float xRotation = 0f;
@@ -28,7 +30,8 @@ public class MouseComponent : MonoBehaviour
 
         if(Input.GetKey(KeyCode.E))
         {
-            SceneManager.LoadScene("SampleScene");
+            sceneFader.FadeOut("SampleScene");
+            //SceneManager.LoadScene("SampleScene");
         }
     }
 
