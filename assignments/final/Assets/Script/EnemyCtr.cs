@@ -1,7 +1,6 @@
-//using System.Collections;
-//using System.Collections.Generic;
+
 using UnityEngine;
-//using static UnityEngine.GraphicsBuffer;
+
 using UnityEngine.AI;
 
 public class EnemyCtr : MonoBehaviour
@@ -16,7 +15,7 @@ public class EnemyCtr : MonoBehaviour
     private float timeSinceLastAttack = 0f;
     public float attackDelay = 1f;
     public bool die = false;
-    //11
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
