@@ -16,7 +16,7 @@ public class EnemyCtr : MonoBehaviour
     private float timeSinceLastAttack = 0f;
     public float attackDelay = 1f;
     public bool die = false;
-    
+    //11
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
