@@ -1,8 +1,7 @@
-//using System.Collections;
-//using System.Collections.Generic;
+
 using UnityEngine;
 using TMPro;
-//using UnityEngine.SceneManagement;
+
 
 
 
@@ -26,7 +25,7 @@ public class PlayerCtr : MonoBehaviour
     public TMP_Text BulletNum;
     public int Bulletnum = 500;
 
-    private RaycastHit raycastHit;
+    
     private RaycastHit enemyHit;
     public float damage = 1f;
 
@@ -83,7 +82,7 @@ public class PlayerCtr : MonoBehaviour
             animator.SetBool("Attack", false);
             fire.SetActive(false);
         }
-        // Debug.DrawRay(fire_pos.position, transform.forward * 50f, Color.red);
+        
 
     }
 
@@ -143,9 +142,9 @@ public class PlayerCtr : MonoBehaviour
             {
                 print("hit" + enemyHit.collider.name);
                 Enemy enemy = enemyHit.collider.GetComponent<Enemy>();
-                //EnemyCtr enemies = enemyHit.collider.GetComponent<EnemyCtr>();
+               
                 enemy.TakeDamage(damage);
-                //enemies.die = true;
+               
             }
         }
     }
@@ -156,7 +155,7 @@ public class PlayerCtr : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             animator.SetBool("Jump", true);
-            //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+           
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 
         }
@@ -205,7 +204,7 @@ public class PlayerCtr : MonoBehaviour
         if (p.CompareTag("pc") )
         {
             GameManager.Instance.missionGuide.text = "Copying\n Do not move";
-            Debug.Log("yes");
+           
             GameManager.Instance.I.enabled = true;
             GameManager.Instance.progress.enabled = true;
 
@@ -219,14 +218,14 @@ public class PlayerCtr : MonoBehaviour
         if (p.CompareTag("pc"))
         {
             GameManager.Instance.missionGuide.text = "Copying\nDo not move";
-            Debug.Log("keeping");
+            
             GameManager.Instance.progress.rectTransform.sizeDelta = new Vector2(GameManager.Instance.progress.rectTransform.sizeDelta.x + 20 * Time.deltaTime, GameManager.Instance.progress.rectTransform.sizeDelta.y);
             if (GameManager.Instance.progress.rectTransform.sizeDelta.x >= 100)
             {
                 GameManager.Instance.missionGuide.text = "Finish\nPress 'E' to collect\n Find key to retreat";
                 GameManager.Instance.I.enabled = false;
                 GameManager.Instance.progress.enabled = false;
-               // GameManager.Instance.U.SetActive(true);
+              
                 
                 GameManager.Instance.finish = true;
                 
@@ -238,14 +237,14 @@ public class PlayerCtr : MonoBehaviour
             {
                 GameManager.Instance.missionGuide.text = "Ready to retreat ";
                 GameManager.Instance.finish = false;
-                Debug.Log("get");
+              
                 GameManager.Instance.keys.SetActive(false);
                 GameManager.Instance.getKey = true;
             }
         }
         if (p.CompareTag("gate") && GameManager.Instance.getKey == true)
         {
-            Debug.Log("leave");
+           
             GameManager.Instance.missionGuide.text = "Press 'E' to leave";
             if (Input.GetKey(KeyCode.E))
             {
@@ -268,7 +267,7 @@ public class PlayerCtr : MonoBehaviour
             }
                 GameManager.Instance.I.enabled = false;
             GameManager.Instance.progress.enabled = false;
-            Debug.Log("stop");
+           
         }
     }
     void PlayFootstepSound()

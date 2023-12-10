@@ -1,8 +1,6 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
+﻿
 using UnityEngine;
-//using UnityEngine.UI;
-//using UnityEngine.SceneManagement;
+
 
 public class MouseComponent : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class MouseComponent : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
+   
     void LateUpdate()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -31,7 +29,7 @@ public class MouseComponent : MonoBehaviour
         if(Input.GetKey(KeyCode.E))
         {
             sceneFader.FadeOut("SampleScene");
-            //SceneManager.LoadScene("SampleScene");
+            
         }
     }
 

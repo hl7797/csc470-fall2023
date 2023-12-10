@@ -1,6 +1,4 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using TMPro;
+
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -23,7 +21,7 @@ public class Enemy : MonoBehaviour
         enemyData = new EnemyData();
         InitializeEnemy();
         animator = GetComponent<Animator>();
-       // GameManager.Instance.NumOfEnemy.text = GameManager.Instance.CountEnemy.ToString();
+       
     }
 
     void InitializeEnemy()
@@ -34,7 +32,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
-            // GameManager.Instance.NumOfEnemy.text = GameManager.Instance.CountEnemy.ToString();
+           
         }
     public void TakeDamage(float damage)
     {
@@ -56,9 +54,7 @@ public class Enemy : MonoBehaviour
     {       
         gameObject.SetActive(false);
       
-        
-        //GameManager.Instance.isDead = true;       
-        //Destroy(this.gameObject);
+       
     }
     
 }
