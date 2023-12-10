@@ -97,7 +97,6 @@ public class GameManager : MonoBehaviour
                     U.SetActive(false);
                 }
 
-
             }
 
         }
