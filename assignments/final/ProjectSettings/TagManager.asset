@@ -6,6 +6,10 @@ TagManager:
   tags:
   - FxTemporaire
   - enemy
+  - pc
+  - p
+  - key
+  - gate
   layers:
   - Default
   - TransparentFX

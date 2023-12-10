@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+//using System.Collections;
+//using System.Collections.Generic;
+//using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -16,14 +16,14 @@ public class Enemy : MonoBehaviour
     public EnemyData enemyData;
     private Animator animator;
     
-    public int CountEnemy = 15;
+    
     
     void Start()
     {
         enemyData = new EnemyData();
         InitializeEnemy();
         animator = GetComponent<Animator>();
-        GameManager.Instance.NumOfEnemy.text = CountEnemy.ToString();
+       // GameManager.Instance.NumOfEnemy.text = GameManager.Instance.CountEnemy.ToString();
     }
 
     void InitializeEnemy()
@@ -33,8 +33,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-       GameManager.Instance. NumOfEnemy.text = CountEnemy.ToString();
-    }
+        
+            // GameManager.Instance.NumOfEnemy.text = GameManager.Instance.CountEnemy.ToString();
+        }
     public void TakeDamage(float damage)
     {
         enemyData.currentHealth -= damage;       
@@ -43,20 +44,22 @@ public class Enemy : MonoBehaviour
             
             EnemyCtr enemies = GetComponent<EnemyCtr>();
             enemies.die = true;
-            CountEnemy -= 1;
+           
             animator.SetBool("die", true);
             Invoke("Die", 2f);           
         }
-    }
+       
+        }
 
 
     void Die()
     {       
         gameObject.SetActive(false);
-        // GameManager.Instance.Checkdie();
+      
+        
         //GameManager.Instance.isDead = true;       
         //Destroy(this.gameObject);
     }
-   
+    
 }
 

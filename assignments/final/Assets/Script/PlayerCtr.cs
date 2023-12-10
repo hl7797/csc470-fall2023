@@ -2,7 +2,7 @@
 //using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 
 
@@ -28,17 +28,26 @@ public class PlayerCtr : MonoBehaviour
 
     private RaycastHit raycastHit;
     private RaycastHit enemyHit;
-    public float damage = 0.1f;
+    public float damage = 1f;
 
-   
+    public SFader sceneFader;
 
+    public AudioClip footStepSound;
+    private float footStepDelay = 0.7f;
+
+    private float nextFootstep = 0;
+    public AudioClip gunSound;
+    public float gunDelay;
+
+    private float nextgun = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         rb =GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        BulletNum.text = Bulletnum.ToString();      
+        BulletNum.text = Bulletnum.ToString();
+        GameManager.Instance.keys.SetActive(false);
     }
 
 
@@ -88,6 +97,7 @@ public class PlayerCtr : MonoBehaviour
              moving = new Vector3(hAxis, 0f, vAxis) * MoveSpeed * Time.deltaTime;
             transform.Translate(moving);
             animator.SetBool("Move", true);
+            PlayFootstepSound();
         }
         else
         {
@@ -95,11 +105,13 @@ public class PlayerCtr : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
+            footStepDelay = 0.45f;
             MoveSpeed = addSpeed;
             animator.SetBool("addSpeed",true);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            footStepDelay = 0.7f;
             MoveSpeed = 3;
             animator.SetBool("addSpeed", false);
         }
@@ -118,7 +130,7 @@ public class PlayerCtr : MonoBehaviour
         BulletNum.text = Bulletnum.ToString();
         if (Input.GetMouseButton(0))
         {
-
+            PlayGunSound();
             Bulletnum -= 1;
             move = false;
            
@@ -163,11 +175,11 @@ public class PlayerCtr : MonoBehaviour
     void Reload()
     {
 
-        if (Bulletnum < 500 && Input.GetKeyDown(KeyCode.R))
+        if (Bulletnum < 800 && Input.GetKeyDown(KeyCode.R))
         {
             animator.SetBool("Reload", true);
             animator.SetTrigger("move");
-            Bulletnum = 500;
+            Bulletnum = 800;
             attack = true;
             animator.SetTrigger("move");
         }
@@ -183,11 +195,100 @@ public class PlayerCtr : MonoBehaviour
         {           
             GameManager.Instance.health = 0;
             animator.SetBool("Dead", true);
-            Invoke("end", 1f);
+            sceneFader.FadeOut("End");
+            GameManager.Instance.endGame = false;
+
         }
     }
-    private void end()
+    public void OnTriggerEnter(Collider p)
     {
-        SceneManager.LoadScene("End");
+        if (p.CompareTag("pc") )
+        {
+            GameManager.Instance.missionGuide.text = "Copying\n Do not move";
+            Debug.Log("yes");
+            GameManager.Instance.I.enabled = true;
+            GameManager.Instance.progress.enabled = true;
+
+        }
+       
+        
+    }
+    public void OnTriggerStay(Collider p)
+    {
+
+        if (p.CompareTag("pc"))
+        {
+            GameManager.Instance.missionGuide.text = "Copying\nDo not move";
+            Debug.Log("keeping");
+            GameManager.Instance.progress.rectTransform.sizeDelta = new Vector2(GameManager.Instance.progress.rectTransform.sizeDelta.x + 20 * Time.deltaTime, GameManager.Instance.progress.rectTransform.sizeDelta.y);
+            if (GameManager.Instance.progress.rectTransform.sizeDelta.x >= 100)
+            {
+                GameManager.Instance.missionGuide.text = "Finish\nPress 'E' to collect\n Find key to retreat";
+                GameManager.Instance.I.enabled = false;
+                GameManager.Instance.progress.enabled = false;
+               // GameManager.Instance.U.SetActive(true);
+                
+                GameManager.Instance.finish = true;
+                
+            }
+        }
+        if (p.CompareTag("key"))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                GameManager.Instance.missionGuide.text = "Ready to retreat ";
+                GameManager.Instance.finish = false;
+                Debug.Log("get");
+                GameManager.Instance.keys.SetActive(false);
+                GameManager.Instance.getKey = true;
+            }
+        }
+        if (p.CompareTag("gate") && GameManager.Instance.getKey == true)
+        {
+            Debug.Log("leave");
+            GameManager.Instance.missionGuide.text = "Press 'E' to leave";
+            if (Input.GetKey(KeyCode.E))
+            {
+                GameManager.Instance.endGame = true;
+                sceneFader.FadeOut("End");
+            }
+
+        }
+
+    }
+    public void OnTriggerExit(Collider p)
+    {
+        if (p.CompareTag("pc"))
+
+        {
+            GameManager.Instance.missionGuide.text = "Replication terminated";
+            if (GameManager.Instance.progress.rectTransform.sizeDelta.x >= 100)
+            {
+                GameManager.Instance.missionGuide.text = " Find key to retreat\n Press 'E' to collect";
+            }
+                GameManager.Instance.I.enabled = false;
+            GameManager.Instance.progress.enabled = false;
+            Debug.Log("stop");
+        }
+    }
+    void PlayFootstepSound()
+    {
+        nextFootstep -= Time.deltaTime;
+        if (nextFootstep <= 0)
+        {
+            GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+            nextFootstep += footStepDelay;
+        }
+
+    }
+    void PlayGunSound()
+    {
+        nextgun -= Time.deltaTime;
+        if (nextgun <= 0)
+        {
+            GetComponent<AudioSource>().PlayOneShot(gunSound, 0.7f);
+            nextgun += gunDelay;
+        }
+
     }
 }

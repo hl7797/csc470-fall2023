@@ -21,7 +21,9 @@ public class EnemyCtr : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         SetRandomTarget();
-        animator = GetComponent<Animator>();                
+        animator = GetComponent<Animator>();
+
+      
     }
    
 
@@ -30,6 +32,7 @@ public class EnemyCtr : MonoBehaviour
         if (die == true)
         {
             navMeshAgent.isStopped = true;
+            
         }
             if (GameManager.Instance.target != null)
             {
@@ -69,10 +72,11 @@ public class EnemyCtr : MonoBehaviour
     {        
         if (Time.time - timeSinceLastAttack >= attackDelay)
         {
+           
             animator.SetBool("Attack", true);
            animator.SetBool("Run", false);
 
-            GameManager.Instance.health -= 10;
+            GameManager.Instance.health -= 5;
             timeSinceLastAttack = Time.time;
         }
     }   
